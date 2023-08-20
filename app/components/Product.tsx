@@ -1,17 +1,13 @@
 import Image from "next/image";
+import formatPrice from "@/util/PriceFormat";
+import { ProductType } from "@/types/ProductType";
 
-type Props = {
-  name: string;
-  image: string;
-  price: number;
-};
-
-export default function Product({ name, image, price }: Props) {
+export default function Product({ name, image, price }: ProductType) {
   return (
     <div>
       <Image src={image} alt={name} width={400} height={400} />
       <h1>{name}</h1>
-      {price}
+      {formatPrice(price as number)}
     </div>
   );
 }
