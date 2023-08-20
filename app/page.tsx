@@ -28,9 +28,9 @@ export default async function Home() {
   const products = await getProducts();
   console.log("🚀 ~ file: page.tsx:27 ~ Home ~ products:", products);
   return (
-    <main>
+    <main className="grid grid-cols-fluid gap-12">
       {products.map((product) => (
-        <Product {...product} />
+        <Product {...product} key={product.id} />
       ))}
     </main>
   );

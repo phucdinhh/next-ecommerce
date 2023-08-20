@@ -6,9 +6,9 @@ import Image from "next/image";
 
 export default function Nav({ user, expires }: Session) {
   return (
-    <nav className="flex justify-between items-center">
+    <nav className="flex justify-between items-center py-2">
       <h1>Styled</h1>
-      <ul className="flex items-center gap-12">
+      <ul className="flex items-center">
         {!user && (
           <li className="bg-teal-600 text-white py-2 px-4 rounded-md">
             <button onClick={() => signIn()}>Sign in</button>
