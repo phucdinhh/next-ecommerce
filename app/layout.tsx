@@ -15,7 +15,6 @@ export default async function RootLayout({
 }) {
   // Fetch the user
   const session = await getServerSession(authOptions);
-  console.log("🚀 ~ file: layout.tsx:18 ~ session:", session);
 
   return (
     <html lang="en">
