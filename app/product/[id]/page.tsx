@@ -1,6 +1,7 @@
 import { SearchParamTyfes } from "@/types/SearchParamTypes";
 import formatPrice from "@/util/PriceFormat";
 import Image from "next/image";
+import AddCart from "./AddCart";
 
 export default async function Product({ searchParams }: SearchParamTyfes) {
   return (
@@ -20,9 +21,7 @@ export default async function Product({ searchParams }: SearchParamTyfes) {
             {searchParams.unit_amount && formatPrice(searchParams.unit_amount)}
           </div>
         </div>
-        <button className="my-12 text-white py-2 px-6 font-medium rounded-md bg-teal-700">
-          Add to cart
-        </button>
+        <AddCart {...searchParams} />
       </div>
     </div>
   );
