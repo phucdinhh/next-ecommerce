@@ -7,6 +7,7 @@ type CartState = {
   cart: AddCartType[];
   toggleCart: () => void;
   addProduct: (item: AddCartType) => void;
+  removeProduct: (item: AddCartType) => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -15,7 +16,7 @@ export const useCartStore = create<CartState>()(
       cart: [],
       isOpen: false,
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
-      addProduct: (item) =>
+      addProduct: (item) => {
         set((state) => {
           const existingitem = state.cart.find(
             (cartItem) => cartItem.id === item.id
@@ -31,7 +32,31 @@ export const useCartStore = create<CartState>()(
           } else {
             return { cart: [...state.cart, { ...item, quantity: 1 }] };
           }
-        }),
+        });
+      },
+      removeProduct: (item) => {
+        set((state) => {
+          // Check if the item exist and remove quantity - 1
+          const existingitem = state.cart.find(
+            (cartItem) => cartItem.id === item.id
+          );
+          if (existingitem && existingitem.quantity! > 1) {
+            const updatedCart = state.cart.map((cartItem) => {
+              if (cartItem.id === item.id) {
+                return { ...cartItem, quantity: cartItem.quantity! - 1 };
+              }
+              return cartItem;
+            });
+            return { cart: updatedCart };
+          } else {
+            // remove item from cart
+            const filterCart = state.cart.filter(
+              (cartItem) => cartItem.id !== item.id
+            );
+            return { cart: filterCart };
+          }
+        });
+      },
     }),
     { name: "cart-store" }
   )

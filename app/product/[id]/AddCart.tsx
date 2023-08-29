@@ -2,6 +2,7 @@
 
 import { useCartStore } from "@/store";
 import { AddCartType } from "@/types/AddCartType";
+import { IoAddCircle, IoRemoveCircle } from "react-icons/io5";
 
 export default function AddCart({
   name,
