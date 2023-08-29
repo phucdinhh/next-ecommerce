@@ -8,7 +8,12 @@ import basket from "@/public/basket.png";
 
 export default function Cart() {
   const cartStore = useCartStore();
-  console.log(cartStore.isOpen);
+
+  // Total price
+  const totalPrice = cartStore.cart.reduce((acc, item) => {
+    return acc + item.unit_amount! * item.quantity!;
+  }, 0);
+
   return (
     <div
       onClick={() => cartStore.toggleCart()}
@@ -66,10 +71,14 @@ export default function Cart() {
             </div>
           </div>
         ))}
+        {/* Checkout and total */}
         {cartStore.cart.length > 0 ? (
-          <button className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white">
-            Checkout
-          </button>
+          <>
+            <p>Total: {formatPrice(totalPrice)}</p>
+            <button className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white">
+              Checkout
+            </button>
+          </>
         ) : (
           <div className="flex flex-col items-center gap-12 text-2xl font-medium pt-56 opacity-75">
             <h1>Uhhh Ohhhh..... It's empty</h1>
