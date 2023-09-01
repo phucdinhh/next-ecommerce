@@ -5,7 +5,7 @@ import AddCart from "./AddCart";
 
 export default async function Product({ searchParams }: SearchParamTyfes) {
   return (
-    <div className="flex justify-between gap-24 p-12 text-gray-700">
+    <div className="flex flex-col justify-between gap-24 p-12 text-gray-700 lg:flex-row">
       <Image
         src={searchParams.image}
         alt={searchParams.name}
