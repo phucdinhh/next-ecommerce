@@ -25,8 +25,8 @@ export const authOptions = {
       // Let create stripe customer
       if (user.name && user.email) {
         const customer = await stripe.customers.create({
-          email: user.email,
-          name: user.name,
+          email: user.email || undefined,
+          name: user.name || undefined,
         });
         // Also update our prisma user with the stripecustomerid
         await prisma.user.update({
@@ -34,6 +34,12 @@ export const authOptions = {
           data: { stripeCustomerId: customer.id },
         });
       }
+    },
+  },
+  callbacks: {
+    async session({ session, token, user }) {
+      session.user = user;
+      return user;
     },
   },
 };
