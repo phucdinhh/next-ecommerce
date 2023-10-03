@@ -1,9 +1,10 @@
-import { SearchParamTyfes } from "@/types/SearchParamTypes";
+import { SearchParamTypes } from "@/types/SearchParamTypes";
 import formatPrice from "@/util/PriceFormat";
 import Image from "next/image";
 import AddCart from "./AddCart";
 
-export default async function Product({ searchParams }: SearchParamTyfes) {
+export default async function Product({ searchParams }: SearchParamTypes) {
+  console.log("{...searchParams} ", { ...searchParams });
   return (
     <div className="flex flex-col 2xl:flex-row items-center justify-between gap-24 text-gray-700">
       <Image

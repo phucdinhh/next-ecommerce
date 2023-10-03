@@ -33,6 +33,8 @@ export default function Checkout() {
       })
       .then((data) => {
         console.log(data);
+        setClientSecret(data.paymentIntent.client_secret);
+        cartStore.setPaymentItent(data.paymentIntent.id);
       });
   }, []);
 

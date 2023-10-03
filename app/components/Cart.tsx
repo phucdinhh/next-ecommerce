@@ -72,7 +72,7 @@ export default function Cart() {
                           image: item.image,
                           name: item.name,
                           quantity: item.quantity,
-                          unit_amount: item.unit_amount,
+                          unit_amount: Number(item.unit_amount),
                         });
                       }}
                     >

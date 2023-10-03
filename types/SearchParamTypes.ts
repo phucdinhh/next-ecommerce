@@ -11,7 +11,7 @@ type SearchParams = {
   features: string;
 };
 
-export type SearchParamTyfes = {
+export type SearchParamTypes = {
   params: Params;
   searchParams: SearchParams;
 };

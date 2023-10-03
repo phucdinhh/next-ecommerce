@@ -4,5 +4,4 @@ export type AddCartType = {
   id: string;
   quantity?: number | 1;
   unit_amount: number | null;
-  description?: string | "";
 };

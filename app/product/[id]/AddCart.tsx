@@ -17,7 +17,13 @@ export default function AddCart({
     <>
       <button
         onClick={() =>
-          cartStore.addProduct({ id, image, unit_amount, quantity, name })
+          cartStore.addProduct({
+            id,
+            image,
+            unit_amount: Number(unit_amount),
+            quantity,
+            name,
+          })
         }
         className="my-12 text-white py-2 px-6 font-medium rounded-md bg-teal-700"
       >
