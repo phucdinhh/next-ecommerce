@@ -25,16 +25,27 @@ export default function Cart() {
       onClick={() => cartStore.toggleCart()}
       className="fixed w-full h-screen left-0 top-0 bg-black/25"
     >
+      {/* Cart */}
       <motion.div
         onClick={(e) => e.stopPropagation()}
         className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-scroll text-gray-700 w-full lg:w-2/5"
       >
-        <button
-          className="text-sm font-bold pb-12"
-          onClick={() => cartStore.toggleCart()}
-        >
-          Back to store
-        </button>
+        {cartStore.onCheckout === "cart" && (
+          <button
+            className="text-sm font-bold pb-12"
+            onClick={() => cartStore.toggleCart()}
+          >
+            Back to store
+          </button>
+        )}
+        {cartStore.onCheckout === "checkout" && (
+          <button
+            className="text-sm font-bold pb-12"
+            onClick={() => cartStore.setCheckout("cart")}
+          >
+            Check your cart
+          </button>
+        )}
         {/* Cart items */}
         {cartStore.onCheckout === "cart" && (
           <>
@@ -89,18 +100,21 @@ export default function Cart() {
         )}
 
         {/* Checkout and total */}
-        {cartStore.cart.length > 0 ? (
+        {cartStore.cart.length > 0 && cartStore.onCheckout === "cart" ? (
           <motion.div layout>
             <p>Total: {formatPrice(totalPrice)}</p>
             <button
-              onClick={() => cartStore.setCheckOut("checkout")}
+              onClick={() => cartStore.setCheckout("checkout")}
               className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white"
             >
               Checkout
             </button>
           </motion.div>
-        ) : (
-          <AnimatePresence>
+        ) : null}
+        {/* Checkout form */}
+        {cartStore.onCheckout === "checkout" && <Checkout />}
+        <AnimatePresence>
+          {!cartStore.cart.length && (
             <motion.div
               animate={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
               initial={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
@@ -110,10 +124,8 @@ export default function Cart() {
               <h1>Uhhh Ohhhh..... It's empty</h1>
               <Image src={basket} alt={"empty cart"} width={200} height={200} />
             </motion.div>
-          </AnimatePresence>
-        )}
-        {/* Checkout form */}
-        {cartStore.onCheckout === "checkout" && <Checkout />}
+          )}
+        </AnimatePresence>
       </motion.div>
     </motion.div>
   );
