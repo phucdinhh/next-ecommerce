@@ -6,6 +6,7 @@ type CartState = {
   isOpen: boolean;
   cart: AddCartType[];
   toggleCart: () => void;
+  clearCart: () => void;
   addProduct: (item: AddCartType) => void;
   removeProduct: (item: AddCartType) => void;
   paymentIntent: string;
@@ -65,6 +66,7 @@ export const useCartStore = create<CartState>()(
       },
       setPaymentItent: (val: string) => set({ paymentIntent: val }),
       setCheckout: (val: string) => set({ onCheckout: val }),
+      clearCart: () => set((state) => ({ cart: [] })),
     }),
     { name: "cart-store" }
   )
